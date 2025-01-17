@@ -1,11 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    html {
-        font-family: "JetBrains Mono", serif;
-    }
+  html {
+    font-family: "JetBrains Mono", serif;
   }
+}
+
+/* Customizing the slider track */
+/* input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #a4ffaf 50%, #333333 50%);
+  height: 100%; /* Matches the Tailwind h-2 class */
+  /* border-radius: 9999px; /* Matches Tailwind rounded-full */
+/* } */
+
+/* input[type="range"]::-moz-range-track {
+  background: linear-gradient(to right, #a4ffaf 50%, #333333 50%);
+  height: 100%;
+  border-radius: 9999px;
+} */
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #E6E5EA;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
