@@ -2,14 +2,23 @@ import { useState } from "react";
 
 const PasswordGenerator = () => {
   const [value, setValue] = useState<number>(0);
-  const [checked, setChecked] = useState<boolean>(false);
+  const [checked, setChecked] = useState<{[key: string]:boolean}>({
+    checkbox1: false,
+    checkbox2: false,
+    checkbox3: false,
+    checkbox4: false,
+  });
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(Number(e.target.value));
   };
 
-  const handleCheckboxChange = () => {
-    setChecked(!checked);
+  const handleCheckboxChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const {name, checked} = e.target;
+    setChecked((prevState) => ({
+      ...prevState,
+      [name]: checked,  //Update the checkbox based on its name
+    }))
   };
 
   return (
@@ -57,7 +66,8 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                checked={checked}
+                name="checkbox1"
+                checked={checked.checkbox1}
                 onChange={handleCheckboxChange}
                 className="accent-neon-green h-4 w-4"
               />
@@ -71,7 +81,8 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                checked={checked}
+                name="checkbox2"
+                checked={checked.checkbox2}
                 onChange={handleCheckboxChange}
                 className="accent-neon-green h-4 w-4"
               />
@@ -85,7 +96,8 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                checked={checked}
+                name="checkbox3"
+                checked={checked.checkbox3}
                 onChange={handleCheckboxChange}
                 className="accent-neon-green h-4 w-4"
               />
@@ -99,7 +111,8 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                checked={checked}
+                name="checkbox4"
+                checked={checked.checkbox4}
                 onChange={handleCheckboxChange}
                 className="accent-neon-green h-4 w-4"
               />
