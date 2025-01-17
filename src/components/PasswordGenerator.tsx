@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const PasswordGenerator = () => {
   const [value, setValue] = useState<number>(0);
-  const [checked, setChecked] = useState<{[key: string]:boolean}>({
+  const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     checkbox1: false,
     checkbox2: false,
     checkbox3: false,
@@ -13,17 +13,17 @@ const PasswordGenerator = () => {
     setValue(Number(e.target.value));
   };
 
-  const handleCheckboxChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    const {name, checked} = e.target;
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
     setChecked((prevState) => ({
       ...prevState,
-      [name]: checked,  //Update the checkbox based on its name
-    }))
+      [name]: checked, //Update the checkbox based on its name
+    }));
   };
 
   return (
     <div className="w-1/4">
-      <h1 className="text-xl text-grey font-bold text-center pt-32 pb-8">
+      <h1 className="text-xl text-grey font-bold text-center pt-16 pb-8">
         Password Generator
       </h1>
 
@@ -41,7 +41,7 @@ const PasswordGenerator = () => {
           />
         </div>
 
-        <div className="bg-grey/50 mt-4 px-4">
+        <div className="bg-grey/50 my-4 px-4 pb-4">
           <div className="flex items-center justify-between py-6">
             <h2 className="text-base text-almost-white font-bold text-start">
               Character Length
@@ -101,13 +101,11 @@ const PasswordGenerator = () => {
                 onChange={handleCheckboxChange}
                 className="accent-neon-green h-4 w-4"
               />
-              <span className="pl-4 text-almost-white">
-                Include Numbers
-              </span>
+              <span className="pl-4 text-almost-white">Include Numbers</span>
             </label>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-8">
             <label>
               <input
                 type="checkbox"
@@ -116,13 +114,31 @@ const PasswordGenerator = () => {
                 onChange={handleCheckboxChange}
                 className="accent-neon-green h-4 w-4"
               />
-              <span className="pl-4 text-almost-white">
-                Include Symbols
-              </span>
+              <span className="pl-4 text-almost-white">Include Symbols</span>
             </label>
           </div>
 
-        </div>
+          <div className="mb-4 p-4 bg-very-dark-grey flex items-center justify-between">
+            <p className="text-grey">STRENGTH</p>
+            <div className="flex items-center">
+              <p className="text-almost-white mr-4 text-xl font-bold">MEDIUM</p>
+              <span className="w-3 h-8 mr-2 block bg-yellow"></span>
+              <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
+              <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
+              <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
+            </div>
+          </div>
+
+            <button
+              type="submit"
+              className="relative text-base group bg-neon-green font-bold w-full py-4 px-8 flex justify-center items-center cursor-pointer border-2 border-neon-green hover:text-neon-green hover:bg-very-dark-grey">
+              GENERATE
+              <span>
+                <img className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-100 group-hover:opacity-0" src="../assets/black-arrow.svg" alt="" />
+                <img className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-0 group-hover:opacity-100" src="../assets/green-arrow.svg" alt="" />
+              </span>
+            </button>
+          </div>
       </form>
     </div>
   );
