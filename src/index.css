@@ -10,19 +10,6 @@
   }
 }
 
-/* Customizing the slider track */
-/* input[type="range"]::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, #a4ffaf 50%, #333333 50%);
-  height: 100%; /* Matches the Tailwind h-2 class */
-  /* border-radius: 9999px; /* Matches Tailwind rounded-full */
-/* } */
-
-/* input[type="range"]::-moz-range-track {
-  background: linear-gradient(to right, #a4ffaf 50%, #333333 50%);
-  height: 100%;
-  border-radius: 9999px;
-} */
-
 input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 20px;
