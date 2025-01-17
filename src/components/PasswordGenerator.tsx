@@ -2,9 +2,14 @@ import { useState } from "react";
 
 const PasswordGenerator = () => {
   const [value, setValue] = useState<number>(0);
+  const [checked, setChecked] = useState<boolean>(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(Number(e.target.value));
+  };
+
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
   };
 
   return (
@@ -40,11 +45,70 @@ const PasswordGenerator = () => {
             min="0"
             max="10"
             value={value}
-            onChange={handleChange}
+            onChange={handleSliderChange}
             style={{
-              background: `linear-gradient(to right, #A4FFAF ${(value/10) * 100}%, #24232C ${(value/10) * 100}%)`,
+              background: `linear-gradient(to right, #A4FFAF ${
+                (value / 10) * 100
+              }%, #24232C ${(value / 10) * 100}%)`,
             }}
           />
+
+          <div className="mt-8 mb-4">
+            <label>
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleCheckboxChange}
+                className="accent-neon-green h-4 w-4"
+              />
+              <span className="pl-4 text-almost-white">
+                Include Uppercase Letters
+              </span>
+            </label>
+          </div>
+
+          <div className="mb-4">
+            <label>
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleCheckboxChange}
+                className="accent-neon-green h-4 w-4"
+              />
+              <span className="pl-4 text-almost-white">
+                Include Lowercase Letters
+              </span>
+            </label>
+          </div>
+
+          <div className="mb-4">
+            <label>
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleCheckboxChange}
+                className="accent-neon-green h-4 w-4"
+              />
+              <span className="pl-4 text-almost-white">
+                Include Numbers
+              </span>
+            </label>
+          </div>
+
+          <div className="mb-4">
+            <label>
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={handleCheckboxChange}
+                className="accent-neon-green h-4 w-4"
+              />
+              <span className="pl-4 text-almost-white">
+                Include Symbols
+              </span>
+            </label>
+          </div>
+
         </div>
       </form>
     </div>
