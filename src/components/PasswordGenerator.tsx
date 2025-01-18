@@ -28,22 +28,24 @@ const PasswordGenerator = () => {
       </h1>
 
       <form className="">
-        <div className="relative group">
+        <div className="relative">
           <input
             type="text"
             name="password"
             className="bg-grey/50 text-almost-white p-2 outline-none w-full"
           />
-          <img
-            src="../assets/green-copy-icon.svg"
-            alt=""
-            className="absolute opacity-100 group-hover:opacity-0 bottom-3 right-4 w-4 cursor-pointer"
-          />
-          <img
-            src="../assets/white-copy-icon.svg"
-            alt=""
-            className="absolute opacity-0 group-hover:opacity-100 bottom-3 right-4 w-4 cursor-pointer"
-          />
+          <div className="group">
+            <img
+              src="../assets/green-copy-icon.svg"
+              alt="Green copy icon"
+              className="absolute bottom-3 right-4 w-4 cursor-pointer opacity-100 group-hover:opacity-0"
+            />
+            <img
+              src="../assets/white-copy-icon.svg"
+              alt="White copy icon"
+              className="absolute bottom-3 right-4 w-4 cursor-pointer opacity-0 group-hover:opacity-100"
+            />
+          </div>
         </div>
 
         <div className="bg-grey/50 my-4 px-4 pb-4">
@@ -134,16 +136,24 @@ const PasswordGenerator = () => {
             </div>
           </div>
 
-            <button
-              type="submit"
-              className="relative text-base group bg-neon-green font-bold w-full py-4 px-8 flex justify-center items-center cursor-pointer border-2 border-neon-green hover:text-neon-green hover:bg-very-dark-grey">
-              GENERATE
-              <span>
-                <img className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-100 group-hover:opacity-0" src="../assets/black-arrow.svg" alt="" />
-                <img className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-0 group-hover:opacity-100" src="../assets/green-arrow.svg" alt="" />
-              </span>
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="relative text-base group bg-neon-green font-bold w-full py-4 px-8 flex justify-center items-center cursor-pointer border-2 border-neon-green hover:text-neon-green hover:bg-very-dark-grey">
+            GENERATE
+            <span>
+              <img
+                className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-100 group-hover:opacity-0"
+                src="../assets/black-arrow.svg"
+                alt=""
+              />
+              <img
+                className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-0 group-hover:opacity-100"
+                src="../assets/green-arrow.svg"
+                alt=""
+              />
+            </span>
+          </button>
+        </div>
       </form>
     </div>
   );
