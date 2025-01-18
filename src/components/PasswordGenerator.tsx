@@ -35,9 +35,9 @@ const PasswordGenerator = () => {
             className="bg-grey/50 text-almost-white p-2 outline-none w-full"
           />
           <img
-            src="../assets/copy-icon.svg"
+            src="../assets/green-copy-icon.svg"
             alt=""
-            className="absolute bottom-3 right-4 w-4"
+            className="absolute bottom-3 right-4 w-4 cursor-pointer"
           />
         </div>
 
