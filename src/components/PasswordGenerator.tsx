@@ -32,7 +32,7 @@ const PasswordGenerator = () => {
           <input
             type="text"
             name="password"
-            className="bg-grey/50 text-almost-white p-2 outline-none w-full"
+            className="bg-dark-grey text-almost-white p-2 outline-none w-full"
           />
           <div className="group">
             <img
@@ -48,7 +48,7 @@ const PasswordGenerator = () => {
           </div>
         </div>
 
-        <div className="bg-grey/50 my-4 px-4 pb-4">
+        <div className="bg-dark-grey my-4 px-4 pb-4">
           <div className="flex items-center justify-between py-6">
             <h2 className="text-base text-almost-white font-bold text-start">
               Character Length
@@ -65,7 +65,7 @@ const PasswordGenerator = () => {
             style={{
               background: `linear-gradient(to right, #A4FFAF ${
                 (value / 10) * 100
-              }%, #24232C ${(value / 10) * 100}%)`,
+              }%, #18171F ${(value / 10) * 100}%)`,
             }}
           />
 
