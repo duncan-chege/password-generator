@@ -28,7 +28,7 @@ const PasswordGenerator = () => {
       </h1>
 
       <form className="">
-        <div className="relative">
+        <div className="relative group">
           <input
             type="text"
             name="password"
@@ -37,7 +37,12 @@ const PasswordGenerator = () => {
           <img
             src="../assets/green-copy-icon.svg"
             alt=""
-            className="absolute bottom-3 right-4 w-4 cursor-pointer"
+            className="absolute opacity-100 group-hover:opacity-0 bottom-3 right-4 w-4 cursor-pointer"
+          />
+          <img
+            src="../assets/white-copy-icon.svg"
+            alt=""
+            className="absolute opacity-0 group-hover:opacity-100 bottom-3 right-4 w-4 cursor-pointer"
           />
         </div>
 
