@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 const PasswordGenerator = () => {
-  const [value, setValue] = useState<number>(4);
+  const [value, setValue] = useState<number>(4);  // Length of password
+  const [password, setPassword] = useState<string>("");   // Generated password
+
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     checkbox1: false,
     checkbox2: false,
@@ -10,7 +12,7 @@ const PasswordGenerator = () => {
   });
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(e.target.value));
+    setValue(Number(e.target.value));   // Update password length based on the slider
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,19 +23,38 @@ const PasswordGenerator = () => {
     }));
   };
 
+  const generatePassword = () => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    let newPassword = "";
+
+    for (let i =0; i < value; i++){
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      newPassword += characters[randomIndex];
+    }
+
+    setPassword(newPassword);
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    generatePassword();
+  }
+
   return (
     <div className="xl:w-1/4 lg:w-1/2 md:w-1/2 w-5/6">
       <h1 className="text-xl text-grey font-bold text-center pb-8">
         Password Generator
       </h1>
 
-      <form className="">
+      <form className="" onSubmit={handleSubmit}>
         <div className="relative">
           <input
             type="text"
             name="password"
             className="bg-dark-grey text-almost-white py-2 px-4 outline-none w-full"
+            value={password}
             placeholder="P4$5W0rD!"
+            readOnly  // Prevents manual input
           />
           <div className="group">
             <img
@@ -129,8 +150,8 @@ const PasswordGenerator = () => {
           <div className="mb-4 p-4 bg-very-dark-grey flex items-center justify-between">
             <p className="text-grey">STRENGTH</p>
             <div className="flex items-center">
-              <p className="text-almost-white mr-4 text-xl font-bold">MEDIUM</p>
-              <span className="w-3 h-8 mr-2 block bg-yellow"></span>
+              <p className="text-almost-white mr-4 text-xl font-bold">TOO WEAK!</p>
+              <span className="w-3 h-8 mr-2 block bg-red"></span>
               <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
               <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
               <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
