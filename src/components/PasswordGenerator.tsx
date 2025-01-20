@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const PasswordGenerator = () => {
-  const [value, setValue] = useState<number>(0);
+  const [value, setValue] = useState<number>(4);
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     checkbox1: false,
     checkbox2: false,
@@ -32,7 +32,8 @@ const PasswordGenerator = () => {
           <input
             type="text"
             name="password"
-            className="bg-dark-grey text-almost-white p-2 outline-none w-full"
+            className="bg-dark-grey text-almost-white py-2 px-4 outline-none w-full"
+            placeholder="P4$5W0rD!"
           />
           <div className="group">
             <img
@@ -58,14 +59,14 @@ const PasswordGenerator = () => {
           <input
             type="range"
             className="w-full h-2 appearance-none"
-            min="0"
-            max="10"
+            min="4"
+            max="12"
             value={value}
             onChange={handleSliderChange}
             style={{
               background: `linear-gradient(to right, #A4FFAF ${
-                (value / 10) * 100
-              }%, #18171F ${(value / 10) * 100}%)`,
+                ((value - 4) / (12 - 4)) * 100
+              }%, #18171F ${((value - 4) / (12 - 4)) * 100}%)`,
             }}
           />
 
