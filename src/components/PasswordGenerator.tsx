@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 const PasswordGenerator = () => {
-  const [value, setValue] = useState<number>(4);  // Length of password
-  const [password, setPassword] = useState<string>("");   // Generated password
+  const [value, setValue] = useState<number>(4); // Length of password
+  const [password, setPassword] = useState<string>(""); // Generated password
+  const [strength, setStrength] = useState<string>(""); // Password strength label
+  const [highlightedBars, setHighlightedBars] = useState<number | null>(null);
 
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     checkbox1: false,
@@ -12,7 +14,7 @@ const PasswordGenerator = () => {
   });
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(e.target.value));   // Update password length based on the slider
+    setValue(Number(e.target.value)); // Update password length based on the slider
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,22 +25,40 @@ const PasswordGenerator = () => {
     }));
   };
 
+  const updatePasswordStrength = (length: number) => {
+    if (length >= 4 && length <= 6) {
+      setStrength("TOO WEAK");
+      setHighlightedBars(1);
+    } else if (length >= 7 && length <= 9){
+      setStrength("WEAK");
+      setHighlightedBars(2);
+    } else if (length >= 10 && length <= 13){
+      setStrength("MEDIUM");
+      setHighlightedBars(3);
+    } else if (length >=14 && length <= 16){
+      setStrength("STRONG");
+      setHighlightedBars(4);
+    }
+  };
+
   const generatePassword = () => {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
     let newPassword = "";
 
-    for (let i =0; i < value; i++){
+    for (let i = 0; i < value; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       newPassword += characters[randomIndex];
     }
 
     setPassword(newPassword);
-  }
+    updatePasswordStrength(value);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     generatePassword();
-  }
+  };
 
   return (
     <div className="xl:w-1/4 lg:w-1/2 md:w-1/2 w-5/6">
@@ -54,7 +74,7 @@ const PasswordGenerator = () => {
             className="bg-dark-grey text-almost-white py-2 px-4 outline-none w-full"
             value={password}
             placeholder="P4$5W0rD!"
-            readOnly  // Prevents manual input
+            readOnly // Prevents manual input
           />
           <div className="group">
             <img
@@ -81,13 +101,13 @@ const PasswordGenerator = () => {
             type="range"
             className="w-full h-2 appearance-none"
             min="4"
-            max="12"
+            max="16"
             value={value}
             onChange={handleSliderChange}
             style={{
               background: `linear-gradient(to right, #A4FFAF ${
-                ((value - 4) / (12 - 4)) * 100
-              }%, #18171F ${((value - 4) / (12 - 4)) * 100}%)`,
+                ((value - 4) / (16 - 4)) * 100
+              }%, #18171F ${((value - 4) / (16 - 4)) * 100}%)`,
             }}
           />
 
@@ -150,7 +170,9 @@ const PasswordGenerator = () => {
           <div className="mb-4 p-4 bg-very-dark-grey flex items-center justify-between">
             <p className="text-grey">STRENGTH</p>
             <div className="flex items-center">
-              <p className="text-almost-white mr-4 text-xl font-bold">TOO WEAK!</p>
+              <p className="text-almost-white mr-4 text-xl font-bold">
+                TOO WEAK!
+              </p>
               <span className="w-3 h-8 mr-2 block bg-red"></span>
               <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
               <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
