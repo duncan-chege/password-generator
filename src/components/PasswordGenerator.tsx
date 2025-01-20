@@ -4,7 +4,7 @@ const PasswordGenerator = () => {
   const [value, setValue] = useState<number>(4); // Length of password
   const [password, setPassword] = useState<string>(""); // Generated password
   const [strength, setStrength] = useState<string>(""); // Password strength label
-  const [highlightedBars, setHighlightedBars] = useState<number | null>(null);
+  const [highlightedBars, setHighlightedBars] = useState<number|null>(null);
 
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     checkbox1: false,
@@ -29,13 +29,13 @@ const PasswordGenerator = () => {
     if (length >= 4 && length <= 6) {
       setStrength("TOO WEAK");
       setHighlightedBars(1);
-    } else if (length >= 7 && length <= 9){
+    } else if (length >= 7 && length <= 9) {
       setStrength("WEAK");
       setHighlightedBars(2);
-    } else if (length >= 10 && length <= 13){
+    } else if (length >= 10 && length <= 13) {
       setStrength("MEDIUM");
       setHighlightedBars(3);
-    } else if (length >=14 && length <= 16){
+    } else if (length >= 14 && length <= 16) {
       setStrength("STRONG");
       setHighlightedBars(4);
     }
@@ -52,7 +52,7 @@ const PasswordGenerator = () => {
     }
 
     setPassword(newPassword);
-    updatePasswordStrength(value);
+    updatePasswordStrength(value); // Update strength after password is generated
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -171,12 +171,12 @@ const PasswordGenerator = () => {
             <p className="text-grey">STRENGTH</p>
             <div className="flex items-center">
               <p className="text-almost-white mr-4 text-xl font-bold">
-                TOO WEAK!
+                {strength}
               </p>
-              <span className="w-3 h-8 mr-2 block bg-red"></span>
-              <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
-              <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
-              <span className="w-3 h-8 mr-2 block border-2 border-almost-white"></span>
+              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 1 ? "bg-red" : "border-2 border-almost-white"}`}></span>
+              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 2 ? "bg-orange" : "border-2 border-almost-white"}`}></span>
+              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 3 ? "bg-yellow" : "border-2 border-almost-white"}`}></span>
+              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 4 ? "bg-neon-green" : "border-2 border-almost-white"}`}></span>
             </div>
           </div>
 
