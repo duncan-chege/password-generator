@@ -5,24 +5,13 @@ const PasswordGenerator = () => {
   const [password, setPassword] = useState<string>(""); // Generated password
   const [strength, setStrength] = useState<string>(""); // Password strength label
   const [highlightedBars, setHighlightedBars] = useState<number>(0);
-
-  const [checked, setChecked] = useState<{ [key: string]: boolean }>({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-  });
+  const [includeUppercase, setIncludeUppercase] = useState<boolean>(false);
+  const [includeLowercase, setIncludeLowercase] = useState<boolean>(false);
+  const [includeNumbers, setIncludeNumbers] = useState<boolean>(false);
+  const [includeSymbols, setIncludeSymbols] = useState<boolean>(false);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(Number(e.target.value)); // Update password length based on the slider
-  };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setChecked((prevState) => ({
-      ...prevState,
-      [name]: checked, //Update the checkbox based on its name
-    }));
   };
 
   const updatePasswordStrength = (length: number) => {
@@ -44,13 +33,40 @@ const PasswordGenerator = () => {
   const generatePassword = () => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+    const numbers = "0123456789";
+    const symbols = "!@#$%^&*()";
+
     let newPassword = "";
 
+    // Step 1: Generate a random password
     for (let i = 0; i < value; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       newPassword += characters[randomIndex];
     }
 
+    // Step 2: Ensure at least 1 character from selected checkboxes
+    if(includeUppercase && !/[A-Z]/.test(newPassword)){
+      newPassword += uppercaseLetters[Math.floor(Math.random() * uppercaseLetters.length)];
+    }
+
+    if(includeLowercase && !/[a-z]/.test(newPassword)){
+      newPassword += lowercaseLetters[Math.floor(Math.random() * lowercaseLetters.length)];
+    }
+
+    if(includeNumbers && !/[0-9]/.test(newPassword)){
+      newPassword += numbers[Math.floor(Math.random() * numbers.length)];
+    }
+
+    if(includeSymbols && !/[!@#$%^&*()]/.test(newPassword)){
+      newPassword += symbols[Math.floor(Math.random() * symbols.length)];
+    }
+
+    // Step 3: Shuffle the passoword to randomize it
+    newPassword = newPassword.split("").sort(() => Math.random() - 0.5).join("");
+
+    // Step 4: Update the state
     setPassword(newPassword);
     updatePasswordStrength(value); // Update strength after password is generated
   };
@@ -116,8 +132,8 @@ const PasswordGenerator = () => {
               <input
                 type="checkbox"
                 name="checkbox1"
-                checked={checked.checkbox1}
-                onChange={handleCheckboxChange}
+                checked={includeUppercase}
+                onChange={(e) => setIncludeUppercase(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
               />
               <span className="pl-4 text-almost-white">
@@ -131,8 +147,8 @@ const PasswordGenerator = () => {
               <input
                 type="checkbox"
                 name="checkbox2"
-                checked={checked.checkbox2}
-                onChange={handleCheckboxChange}
+                checked={includeLowercase}
+                onChange={(e) => setIncludeLowercase(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
               />
               <span className="pl-4 text-almost-white">
@@ -146,8 +162,8 @@ const PasswordGenerator = () => {
               <input
                 type="checkbox"
                 name="checkbox3"
-                checked={checked.checkbox3}
-                onChange={handleCheckboxChange}
+                checked={includeNumbers}
+                onChange={(e) => setIncludeNumbers(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
               />
               <span className="pl-4 text-almost-white">Include Numbers</span>
@@ -159,8 +175,8 @@ const PasswordGenerator = () => {
               <input
                 type="checkbox"
                 name="checkbox4"
-                checked={checked.checkbox4}
-                onChange={handleCheckboxChange}
+                checked={includeSymbols}
+                onChange={(e) => setIncludeSymbols(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
               />
               <span className="pl-4 text-almost-white">Include Symbols</span>
