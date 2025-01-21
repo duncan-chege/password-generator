@@ -31,42 +31,56 @@ const PasswordGenerator = () => {
   };
 
   const generatePassword = () => {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
     const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
     const numbers = "0123456789";
     const symbols = "!@#$%^&*()";
 
-    let newPassword = "";
+    let mandatoryCharacters = "";   //  A randomly generated character
+    let allCharacters = "";   // The pool of characters used to randomly generate the password.
 
-    // Step 1: Generate a random password
-    for (let i = 0; i < value; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      newPassword += characters[randomIndex];
+    // Include characters based on selected checkboxes
+    if (includeUppercase) {
+      mandatoryCharacters +=
+        uppercaseLetters[Math.floor(Math.random() * uppercaseLetters.length)];  // A randomly generated uppercase letter
+      allCharacters += uppercaseLetters; // Ensures the password can include additional uppercase letters beyond the one guaranteed in mandatoryCharacters
+    }
+    if (includeLowercase) {
+      mandatoryCharacters +=
+        lowercaseLetters[Math.floor(Math.random() * lowercaseLetters.length)];  // A randomly generated lowercase letter
+      allCharacters += lowercaseLetters;
+    }
+    if (includeNumbers) {
+      mandatoryCharacters +=
+        numbers[Math.floor(Math.random() * numbers.length)];  // A randomly generated number letter
+      allCharacters += numbers;
+    }
+    if (includeSymbols) {
+      mandatoryCharacters +=
+        symbols[Math.floor(Math.random() * symbols.length)];  // A randomly generated symbol
+      allCharacters += symbols;
     }
 
-    // Step 2: Ensure at least 1 character from selected checkboxes
-    if(includeUppercase && !/[A-Z]/.test(newPassword)){
-      newPassword += uppercaseLetters[Math.floor(Math.random() * uppercaseLetters.length)];
+    // Use a default character set if no checkboxes are selected
+    if (allCharacters === "") {
+      allCharacters = uppercaseLetters + lowercaseLetters + numbers + symbols;
     }
 
-    if(includeLowercase && !/[a-z]/.test(newPassword)){
-      newPassword += lowercaseLetters[Math.floor(Math.random() * lowercaseLetters.length)];
+    // Generate remaining characters to meet the password length
+    let remainingCharacters = "";
+    const remainingLength = Math.max(0, value - mandatoryCharacters.length);
+    for (let i = 0; i < remainingLength; i++) {
+      const randomIndex = Math.floor(Math.random() * allCharacters.length);
+      remainingCharacters += allCharacters[randomIndex];
     }
 
-    if(includeNumbers && !/[0-9]/.test(newPassword)){
-      newPassword += numbers[Math.floor(Math.random() * numbers.length)];
-    }
+    // Combine mandatory and remaining characters, then shuffle
+    let newPassword = (mandatoryCharacters + remainingCharacters)
+      .split("")
+      .sort(() => Math.random() - 0.5)
+      .join("");
 
-    if(includeSymbols && !/[!@#$%^&*()]/.test(newPassword)){
-      newPassword += symbols[Math.floor(Math.random() * symbols.length)];
-    }
-
-    // Step 3: Shuffle the passoword to randomize it
-    newPassword = newPassword.split("").sort(() => Math.random() - 0.5).join("");
-
-    // Step 4: Update the state
+    // Update the password state
     setPassword(newPassword);
     updatePasswordStrength(value); // Update strength after password is generated
   };
@@ -131,7 +145,6 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                name="checkbox1"
                 checked={includeUppercase}
                 onChange={(e) => setIncludeUppercase(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
@@ -146,7 +159,6 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                name="checkbox2"
                 checked={includeLowercase}
                 onChange={(e) => setIncludeLowercase(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
@@ -161,7 +173,6 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                name="checkbox3"
                 checked={includeNumbers}
                 onChange={(e) => setIncludeNumbers(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
@@ -174,7 +185,6 @@ const PasswordGenerator = () => {
             <label>
               <input
                 type="checkbox"
-                name="checkbox4"
                 checked={includeSymbols}
                 onChange={(e) => setIncludeSymbols(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
