@@ -4,7 +4,7 @@ const PasswordGenerator = () => {
   const [value, setValue] = useState<number>(4); // Length of password
   const [password, setPassword] = useState<string>(""); // Generated password
   const [strength, setStrength] = useState<string>(""); // Password strength label
-  const [highlightedBars, setHighlightedBars] = useState<number|null>(null);
+  const [highlightedBars, setHighlightedBars] = useState<number>(0);
 
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     checkbox1: false,
@@ -173,10 +173,27 @@ const PasswordGenerator = () => {
               <p className="text-almost-white mr-4 text-xl font-bold">
                 {strength}
               </p>
-              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 1 ? "bg-red" : "border-2 border-almost-white"}`}></span>
-              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 2 ? "bg-orange" : "border-2 border-almost-white"}`}></span>
-              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 3 ? "bg-yellow" : "border-2 border-almost-white"}`}></span>
-              <span className={`w-3 h-8 mr-2 block ${highlightedBars == 4 ? "bg-neon-green" : "border-2 border-almost-white"}`}></span>
+              <div className="flex">
+                {[...Array(4)].map((_, i) => {
+                  // Determine the color for the bar based on the strength level
+                  let barColor = "border-2 border-almost-white"; // Default unhighlighted style
+                  if (highlightedBars > 0) {
+                    if (highlightedBars === 1)
+                      barColor = i === 0 ? "bg-red" : barColor; // Only the first bar is red
+                    if (highlightedBars === 2)
+                      barColor = i < 2 ? "bg-orange" : barColor; // First two bars are orange
+                    if (highlightedBars === 3)
+                      barColor = i < 3 ? "bg-yellow" : barColor; // First three bars are yellow
+                    if (highlightedBars === 4) barColor = "bg-neon-green"; // All bars are green
+                  }
+
+                  return (
+                    <span
+                      key={i}
+                      className={`w-3 h-8 mr-2 block ${barColor}`}></span>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
