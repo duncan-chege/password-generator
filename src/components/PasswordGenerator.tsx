@@ -115,12 +115,12 @@ const PasswordGenerator = () => {
           />
           <div className="group">
             <img
-              src="../assets/green-copy-icon.svg"
+              src="./assets/green-copy-icon.svg"
               alt="Green copy icon"
               className="absolute bottom-3 right-4 w-4 cursor-pointer opacity-100 group-hover:opacity-0"
             />
             <img
-              src="../assets/white-copy-icon.svg"
+              src="./assets/white-copy-icon.svg"
               alt="White copy icon"
               className="absolute bottom-3 right-4 w-4 cursor-pointer opacity-0 group-hover:opacity-100"
               onClick={copyDisplay}
@@ -243,12 +243,12 @@ const PasswordGenerator = () => {
             <span>
               <img
                 className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-100 group-hover:opacity-0"
-                src="../assets/black-arrow.svg"
+                src="./assets/black-arrow.svg"
                 alt=""
               />
               <img
                 className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-0 group-hover:opacity-100"
-                src="../assets/green-arrow.svg"
+                src="./assets/green-arrow.svg"
                 alt=""
               />
             </span>
