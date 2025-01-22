@@ -9,6 +9,7 @@ const PasswordGenerator = () => {
   const [includeLowercase, setIncludeLowercase] = useState<boolean>(false);
   const [includeNumbers, setIncludeNumbers] = useState<boolean>(false);
   const [includeSymbols, setIncludeSymbols] = useState<boolean>(false);
+  const [copyPassword, setCopyPassword] = useState<boolean>(false);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(Number(e.target.value)); // Update password length based on the slider
@@ -36,28 +37,28 @@ const PasswordGenerator = () => {
     const numbers = "0123456789";
     const symbols = "!@#$%^&*()";
 
-    let mandatoryCharacters = "";   //  A randomly generated character
-    let allCharacters = "";   // The pool of characters used to randomly generate the password.
+    let mandatoryCharacters = ""; //  A randomly generated character
+    let allCharacters = ""; // The pool of characters used to randomly generate the password.
 
     // Include characters based on selected checkboxes
     if (includeUppercase) {
       mandatoryCharacters +=
-        uppercaseLetters[Math.floor(Math.random() * uppercaseLetters.length)];  // A randomly generated uppercase letter
+        uppercaseLetters[Math.floor(Math.random() * uppercaseLetters.length)]; // A randomly generated uppercase letter
       allCharacters += uppercaseLetters; // Ensures the password can include additional uppercase letters beyond the one guaranteed in mandatoryCharacters
     }
     if (includeLowercase) {
       mandatoryCharacters +=
-        lowercaseLetters[Math.floor(Math.random() * lowercaseLetters.length)];  // A randomly generated lowercase letter
+        lowercaseLetters[Math.floor(Math.random() * lowercaseLetters.length)]; // A randomly generated lowercase letter
       allCharacters += lowercaseLetters;
     }
     if (includeNumbers) {
       mandatoryCharacters +=
-        numbers[Math.floor(Math.random() * numbers.length)];  // A randomly generated number letter
+        numbers[Math.floor(Math.random() * numbers.length)]; // A randomly generated number letter
       allCharacters += numbers;
     }
     if (includeSymbols) {
       mandatoryCharacters +=
-        symbols[Math.floor(Math.random() * symbols.length)];  // A randomly generated symbol
+        symbols[Math.floor(Math.random() * symbols.length)]; // A randomly generated symbol
       allCharacters += symbols;
     }
 
@@ -83,6 +84,12 @@ const PasswordGenerator = () => {
     // Update the password state
     setPassword(newPassword);
     updatePasswordStrength(value); // Update strength after password is generated
+  };
+
+  const copyDisplay = () => {
+    setCopyPassword(true);
+    navigator.clipboard.writeText(password);
+    setTimeout(() => setCopyPassword(false), 3000);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,8 +123,14 @@ const PasswordGenerator = () => {
               src="../assets/white-copy-icon.svg"
               alt="White copy icon"
               className="absolute bottom-3 right-4 w-4 cursor-pointer opacity-0 group-hover:opacity-100"
+              onClick={copyDisplay}
             />
           </div>
+          {copyPassword && (
+            <span className="text-neon-green absolute bottom-2.5 right-12 text-sm">
+              COPIED
+            </span>
+          )}
         </div>
 
         <div className="bg-dark-grey my-4 px-4 pb-4">
