@@ -115,6 +115,7 @@ const PasswordGenerator = () => {
             className="bg-dark-grey text-almost-white py-2 px-4 outline-none w-full"
             value={password}
             placeholder="P4$5W0rD!"
+            aria-label="Password field"
             readOnly // Prevents manual input
           />
           <div className="group">
@@ -151,6 +152,7 @@ const PasswordGenerator = () => {
             max="16"
             value={value}
             onChange={handleSliderChange}
+            aria-label="Password range"
             style={{
               background: `linear-gradient(to right, #A4FFAF ${
                 ((value - 4) / (16 - 4)) * 100
@@ -165,6 +167,7 @@ const PasswordGenerator = () => {
                 checked={includeUppercase}
                 onChange={(e) => setIncludeUppercase(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
+                aria-label="Include Uppercase Letters"
               />
               <span className="pl-4 text-almost-white">
                 Include Uppercase Letters
@@ -179,6 +182,7 @@ const PasswordGenerator = () => {
                 checked={includeLowercase}
                 onChange={(e) => setIncludeLowercase(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
+                aria-label="Include Lowercase Letters"
               />
               <span className="pl-4 text-almost-white">
                 Include Lowercase Letters
@@ -193,6 +197,7 @@ const PasswordGenerator = () => {
                 checked={includeNumbers}
                 onChange={(e) => setIncludeNumbers(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
+                aria-label="Include Numbers"
               />
               <span className="pl-4 text-almost-white">Include Numbers</span>
             </label>
@@ -205,6 +210,7 @@ const PasswordGenerator = () => {
                 checked={includeSymbols}
                 onChange={(e) => setIncludeSymbols(e.target.checked)}
                 className="accent-neon-green h-4 w-4"
+                aria-label="Include Symbols"
               />
               <span className="pl-4 text-almost-white">Include Symbols</span>
             </label>
