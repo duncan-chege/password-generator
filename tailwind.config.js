@@ -15,7 +15,10 @@ export default {
         "grey": "#817D92",
         "dark-grey": "#24232C",
         "very-dark-grey": "#18171F",
-      }
+      },
+      backgroundImage: {
+        'wave': `url('../src/assets/bg-wave.svg')`,
+      },
     },
   },
   plugins: [],
