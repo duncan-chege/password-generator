@@ -102,7 +102,7 @@ const PasswordGenerator = () => {
   };
 
   return (
-    <div className="xl:w-1/4 lg:w-1/2 md:w-1/2 w-5/6">
+    <div className="xl:w-1/3 lg:w-1/2 md:w-1/2 w-5/6">
       <h1 className="text-xl text-grey font-bold text-center pb-8">
         Password Generator
       </h1>
