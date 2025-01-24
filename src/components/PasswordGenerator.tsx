@@ -1,4 +1,8 @@
 import { useState } from "react";
+import GreenCopyIcon from "../assets/green-copy-icon.svg";
+import WhiteCopyIcon from "../assets/white-copy-icon.svg";
+import GreenArrow from "../assets/green-arrow.svg";
+import BlackArrow from "../assets/black-arrow.svg";
 
 const PasswordGenerator = () => {
   const [value, setValue] = useState<number>(4); // Length of password
@@ -115,12 +119,12 @@ const PasswordGenerator = () => {
           />
           <div className="group">
             <img
-              src="./assets/green-copy-icon.svg"
+              src={GreenCopyIcon}
               alt="Green copy icon"
               className="absolute bottom-3 right-4 w-4 cursor-pointer opacity-100 group-hover:opacity-0"
             />
             <img
-              src="./assets/white-copy-icon.svg"
+              src={WhiteCopyIcon}
               alt="White copy icon"
               className="absolute bottom-3 right-4 w-4 cursor-pointer opacity-0 group-hover:opacity-100"
               onClick={copyDisplay}
@@ -243,12 +247,12 @@ const PasswordGenerator = () => {
             <span>
               <img
                 className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-100 group-hover:opacity-0"
-                src="./assets/black-arrow.svg"
+                src={BlackArrow}
                 alt=""
               />
               <img
                 className="absolute left-2/3 transform -translate-x-2/3 bottom-[1.4rem] opacity-0 group-hover:opacity-100"
-                src="./assets/green-arrow.svg"
+                src={GreenArrow}
                 alt=""
               />
             </span>
